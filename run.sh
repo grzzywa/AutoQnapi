@@ -1,27 +1,13 @@
-export LANG=pl_PL.UTF-8
-export LANGUAGE=pl_PL.UTF-8
-export LC_CTYPE="pl_PL.UTF-8"
-export LC_NUMERIC="pl_PL.UTF-8"
-export LC_TIME="pl_PL.UTF-8"
-export LC_COLLATE="pl_PL.UTF-8"
-export LC_MONETARY="pl_PL.UTF-8"
-export LC_MESSAGES="pl_PL.UTF-8"
-export LC_PAPER="pl_PL.UTF-8"
-export LC_NAME="pl_PL.UTF-8"
-export LC_ADDRESS="pl_PL.UTF-8"
-export LC_TELEPHONE="pl_PL.UTF-8"
-export LC_MEASUREMENT="pl_PL.UTF-8"
-export LC_IDENTIFICATION="pl_PL.UTF-8"
-
-
-
+#!/bin/bash
 
 while [[ true ]]; do
+    echo "working"
     if [[ -d /data ]]; then
 
         cd /data
+        echo "searching for video files"
         find -type f \( -name "*.avi" -or -name "*.mkv" -or -name "*.mp4" \) > /data.video.raw.txt;
-
+        echo "searching subtitles" 
         while IFS='' read -r line || [[ -n "$line" ]]; do
             movFile="${line}"
             txtFile="${line::-4}.txt"
@@ -39,6 +25,8 @@ while [[ true ]]; do
 
             fi
         done < "/data.video.raw.txt"
+    else
+        echo "data not found"
     fi
     sleep 600
 done
